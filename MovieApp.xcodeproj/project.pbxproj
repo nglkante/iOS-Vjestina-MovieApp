@@ -32,8 +32,11 @@
 		E7F178272BEBDDD90073D66B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E7F178262BEBDDD90073D66B /* Kingfisher */; };
 		E7F178292BEBFB600073D66B /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F178282BEBFB600073D66B /* MovieListViewController.swift */; };
 		E7F1782D2BED40C40073D66B /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F1782C2BED40C40073D66B /* CustomTableViewCell.swift */; };
-		E7F178312BEE7D250073D66B /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F178302BEE7D250073D66B /* CategoryViewController.swift */; };
+		E7F178312BEE7D250073D66B /* MovieCategoriesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F178302BEE7D250073D66B /* MovieCategoriesListViewController.swift */; };
 		E7F178352BEE992F0073D66B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F178342BEE992F0073D66B /* CategoryCell.swift */; };
+		E7F178372BF9432E0073D66B /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F178362BF9432E0073D66B /* FavoritesViewController.swift */; };
+		E7F178392BFA0A370073D66B /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F178382BFA0A370073D66B /* TabBarController.swift */; };
+		E7F1783B2BFA1FCB0073D66B /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F1783A2BFA1FCB0073D66B /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,8 +64,11 @@
 		E7F178232BEA2DCB0073D66B /* TestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFile.swift; sourceTree = "<group>"; };
 		E7F178282BEBFB600073D66B /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		E7F1782C2BED40C40073D66B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		E7F178302BEE7D250073D66B /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		E7F178302BEE7D250073D66B /* MovieCategoriesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoriesListViewController.swift; sourceTree = "<group>"; };
 		E7F178342BEE992F0073D66B /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		E7F178362BF9432E0073D66B /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		E7F178382BFA0A370073D66B /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		E7F1783A2BFA1FCB0073D66B /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 		E79A151A2BBC3D9B00685E66 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				E7F178362BF9432E0073D66B /* FavoritesViewController.swift */,
 				E7F1782F2BEE7CD50073D66B /* Test */,
 				E7F1782E2BEE7CBB0073D66B /* CustomCellView */,
 				E7F1781E2BE544E60073D66B /* Summary */,
@@ -113,7 +120,9 @@
 				E79A15292BBC3D9D00685E66 /* Info.plist */,
 				E7649D232BBC5E1C00B26963 /* MovieDetailsViewController.swift */,
 				E7F178282BEBFB600073D66B /* MovieListViewController.swift */,
-				E7F178302BEE7D250073D66B /* CategoryViewController.swift */,
+				E7F178302BEE7D250073D66B /* MovieCategoriesListViewController.swift */,
+				E7F178382BFA0A370073D66B /* TabBarController.swift */,
+				E7F1783A2BFA1FCB0073D66B /* Router.swift */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 			files = (
 				E7F177FD2BD1CEC40073D66B /* RatingView.swift in Sources */,
 				E7F178052BE525BB0073D66B /* NameAndYearView.swift in Sources */,
+				E7F1783B2BFA1FCB0073D66B /* Router.swift in Sources */,
 				E7F178092BE529850073D66B /* Date+Extensions.swift in Sources */,
 				E7F178102BE52A9F0073D66B /* ReleaseDateView.swift in Sources */,
 				E7F177FF2BD1CF3B0073D66B /* RatingView+Design.swift in Sources */,
@@ -280,17 +290,19 @@
 				E7F178222BE545130073D66B /* SummaryView+Design.swift in Sources */,
 				E7F178192BE538650073D66B /* CatToString+Extensions.swift in Sources */,
 				E7649D242BBC5E1D00B26963 /* MovieDetailsViewController.swift in Sources */,
+				E7F178392BFA0A370073D66B /* TabBarController.swift in Sources */,
 				E7F178242BEA2DCB0073D66B /* TestFile.swift in Sources */,
 				E7F1782D2BED40C40073D66B /* CustomTableViewCell.swift in Sources */,
 				E7F1781B2BE53B880073D66B /* FormatDuration+Extensions.swift in Sources */,
 				E7F178292BEBFB600073D66B /* MovieListViewController.swift in Sources */,
-				E7F178312BEE7D250073D66B /* CategoryViewController.swift in Sources */,
+				E7F178312BEE7D250073D66B /* MovieCategoriesListViewController.swift in Sources */,
 				E7F178352BEE992F0073D66B /* CategoryCell.swift in Sources */,
 				E7F1780E2BE52A7C0073D66B /* ReleaseDateView+Design.swift in Sources */,
 				E7F178072BE525DC0073D66B /* NameAndYearView+Design.swift in Sources */,
 				E7F178172BE534F70073D66B /* CategoriesAndDurationView+Design.swift in Sources */,
 				E7F178152BE534DC0073D66B /* CategoriesAndDurationView.swift in Sources */,
 				E79A151C2BBC3D9B00685E66 /* AppDelegate.swift in Sources */,
+				E7F178372BF9432E0073D66B /* FavoritesViewController.swift in Sources */,
 				E7F178022BD1CFC80073D66B /* UIFont+Extensions.swift in Sources */,
 				E79A151E2BBC3D9B00685E66 /* SceneDelegate.swift in Sources */,
 			);

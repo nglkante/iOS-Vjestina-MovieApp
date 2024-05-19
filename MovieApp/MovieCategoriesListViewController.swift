@@ -13,7 +13,17 @@ class MovieCategoriesListViewController: UIViewController {
     var trendingCollectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = .white
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor(.black)]
+        appearance.largeTitleTextAttributes = [.backgroundColor: UIColor(.white)]
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        title = "Movie list"
         popularMovies = MovieUseCase().popularMovies
         trendingMovies = MovieUseCase().trendingMovies
         freeToWatchMovies = MovieUseCase().freeToWatchMovies
@@ -30,7 +40,7 @@ class MovieCategoriesListViewController: UIViewController {
         popularLabel.font = UIFont.boldSystemFont(ofSize: 20)
         popularLabel.autoPinEdge(toSuperviewSafeArea: .top,withInset: 24)
         popularLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 12)
-       
+        
         popularcollectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: layout)
@@ -87,16 +97,26 @@ class MovieCategoriesListViewController: UIViewController {
         trendingCollectionView.autoPinEdge(toSuperviewEdge: .right,withInset: -10)
         trendingCollectionView.autoSetDimension(.height, toSize: 142.0)
     }
-    
+    private let router: Router!
+    init(router: Router!){
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    func showMovieDetails(movieID: Int){
+        router.showMovieDetails(movieID: movieID)
+    }
 }
-extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MovieCategoriesListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.popularcollectionView {
-                return popularMovies.count
-            }
+            return popularMovies.count
+        }
         else if collectionView == self.freeToWatchCollectionView {
             return freeToWatchMovies.count
         }
@@ -123,7 +143,24 @@ extension CategoryViewController: UICollectionViewDataSource, UICollectionViewDe
             return trendingMovieCell
         }
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Did select item at")
+        if collectionView == self.popularcollectionView {
+            let popularMovieID = popularMovies[indexPath.row].id
+            print("Did select item at: \(popularMovieID)")
+            showMovieDetails(movieID: popularMovieID)
+        }
+        else if collectionView == self.freeToWatchCollectionView{
+            let freeToWatchMovieID = freeToWatchMovies[indexPath.row].id
+            showMovieDetails(movieID: freeToWatchMovieID)
+        }
+        else{
+            let trendingMovieID = trendingMovies[indexPath.row].id
+            showMovieDetails(movieID: trendingMovieID)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 130, height: 179)
     }

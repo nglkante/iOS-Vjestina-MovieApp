@@ -14,7 +14,7 @@ class CategoryCell: UICollectionViewCell {
     }
     let container = UIView()
     let movieImage = UIImageView()
-    let textLabel = UILabel()
+    let heartImage = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,11 +27,17 @@ class CategoryCell: UICollectionViewCell {
         container.autoPinEdge(toSuperviewEdge: .bottom, withInset: 12.0)
         container.autoSetDimension(.height, toSize: 142.0)
         container.addSubview(movieImage)
+        container.addSubview(heartImage)
         
         movieImage.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
         movieImage.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
         movieImage.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
         movieImage.autoSetDimension(.width, toSize: 122)
+        
+        heartImage.image = UIImage(systemName: "heart.circle")
+        heartImage.tintColor = .white
+        heartImage.autoPinEdge(toSuperviewEdge: .top, withInset: 8)
+        heartImage.autoPinEdge(toSuperviewEdge: .left, withInset: 8)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -9,6 +9,15 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor(.black)]
+        appearance.largeTitleTextAttributes = [.backgroundColor: UIColor(.white)]
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        title = "Movie list"
         allMovies = MovieUseCase().allMovies
         let tableView = UITableView(
             frame: CGRect(
@@ -18,8 +27,8 @@ class MovieListViewController: UIViewController {
                 height: view.bounds.height))
         tableView.rowHeight = 150
         view.addSubview(tableView)
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellIdentifier) // 1.
-        tableView.dataSource = self // 2.
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.dataSource = self
     }
 }
 extension MovieListViewController: UITableViewDataSource,UITableViewDelegate { // 3.

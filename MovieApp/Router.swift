@@ -5,8 +5,8 @@ class Router{
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    func showYellowController() {
-        let vc = MovieDetailsViewController()
-        navigationController.pushViewController(vc, animated: true)
+    func showMovieDetails(movieID: Int) {
+        let vc = MovieDetailsViewController(movieID: movieID)
+        navigationController.present(vc, animated: true)
     }
 }
