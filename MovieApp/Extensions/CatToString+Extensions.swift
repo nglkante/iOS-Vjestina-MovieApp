@@ -1,5 +1,7 @@
 import MovieAppData
+
 extension MovieCategoryModel {
+    
     func toString() -> String {
         switch self {
         case .action: return "Action"

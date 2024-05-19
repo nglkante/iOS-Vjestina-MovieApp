@@ -1,16 +1,15 @@
 import UIKit
 
-class DateView: UIView {
+class ReleaseDateView: UIView {
 
-    let date: Double
+    let releaseDate: String
     let defaultPadding: CGFloat = 8
 
     var stackView: UIStackView!
-    var ratingLabel: UILabel!
-    var userScoreLabel: UILabel!
+    var releaseDateLabel: UILabel!
 
-    init(rating: Double) {
-        self.rating = rating
+    init(releaseDate: String) {
+        self.releaseDate = releaseDate
 
         super.init(frame: .zero)
 

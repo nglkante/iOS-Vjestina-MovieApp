@@ -25,15 +25,11 @@ class CustomTableViewCell: UITableViewCell {
         labelName.translatesAutoresizingMaskIntoConstraints = false
         labelSummary.translatesAutoresizingMaskIntoConstraints = false
         
-        container.layer.shadowColor = UIColor.gray.cgColor
-        container.layer.shadowOffset = CGSize(width: 100, height: 12)
-        container.layer.shadowOpacity = 0.5
-        
         addSubview(container)
         container.backgroundColor = .white
+        container.layer.cornerRadius = 10
         container.autoPinEdge(toSuperviewEdge: .leading, withInset: 16.0)
         container.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16.0)
-        container.autoPinEdge(toSuperviewEdge: .bottom, withInset: 5.0)
         container.autoSetDimension(.height, toSize: 142.0)
         
         container.addSubview(movieImage)

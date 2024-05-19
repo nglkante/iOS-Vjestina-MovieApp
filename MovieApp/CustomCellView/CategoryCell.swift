@@ -3,7 +3,7 @@ import PureLayout
 import Kingfisher
 import MovieAppData
 
-class CollectionViewForCatList: UICollectionViewCell {
+class CategoryCell: UICollectionViewCell {
     
     var movie: MovieModel? {
         didSet {
@@ -14,10 +14,10 @@ class CollectionViewForCatList: UICollectionViewCell {
     }
     let container = UIView()
     let movieImage = UIImageView()
+    let textLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         
         addSubview(container)
         container.backgroundColor = .white
@@ -31,7 +31,7 @@ class CollectionViewForCatList: UICollectionViewCell {
         movieImage.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
         movieImage.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
         movieImage.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
-        movieImage.autoSetDimension(.width, toSize: 97)
+        movieImage.autoSetDimension(.width, toSize: 122)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
