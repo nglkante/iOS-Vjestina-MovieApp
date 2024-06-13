@@ -5,15 +5,8 @@ import MovieAppData
 
 class CustomTableViewCell: UITableViewCell {
     
-    var movie: MovieModel? {
-        didSet {
-            guard let movie = movie else{return}
-            movieImage.kf.indicatorType = .activity
-            movieImage.kf.setImage(with: URL(string: movie.imageUrl))
-            labelName.text = movie.name
-            labelSummary.text = movie.summary
-        }
-      }
+    static let identifier = "cellId"
+    
     let container = UIView()
     let movieImage = UIImageView()
     let labelName = UILabel()
@@ -21,6 +14,11 @@ class CustomTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = CGSize(width: 12, height: 12)
+        layer.shadowOpacity = 0.5
+        
         movieImage.translatesAutoresizingMaskIntoConstraints = false
         labelName.translatesAutoresizingMaskIntoConstraints = false
         labelSummary.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +55,20 @@ class CustomTableViewCell: UITableViewCell {
         labelSummary.autoPinEdge(toSuperviewEdge: .bottom, withInset: 32)
         
     }
+    
+    override func prepareForReuse() {
+        movieImage.image = nil
+        labelName.text = ""
+        labelSummary.text = ""
+    }
+    
+    func set(movie: MovieModel) {
+        movieImage.kf.indicatorType = .activity
+        movieImage.kf.setImage(with: URL(string: movie.imageUrl))
+        labelName.text = movie.name
+        labelSummary.text = movie.summary
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

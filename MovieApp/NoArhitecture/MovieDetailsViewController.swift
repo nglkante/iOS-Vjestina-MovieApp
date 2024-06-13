@@ -6,44 +6,49 @@ import Kingfisher
 class MovieDetailsViewController: UIViewController {
     let movieID: Int
     var crewMemberLabels: [UILabel] = []
-    init(movieID:Int){
+    let movieUseCase: MovieUseCaseProtocol
+    
+    init(movieID: Int, movieUseCase: MovieUseCaseProtocol = MovieUseCase()) {
         self.movieID = movieID
+        self.movieUseCase = movieUseCase
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
-        appearance.titleTextAttributes = [.foregroundColor: UIColor(.black)]
-        appearance.largeTitleTextAttributes = [.backgroundColor: UIColor(.white)]
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        title = "Movie details"
-        navigationItem.leftBarButtonItem?.tintColor = .blue
-        if let details = MovieUseCase().getDetails(id: movieID){
-            let rating = details.rating
-            let name = details.name
-            let year = details.year
-            let releaseDate = details.releaseDate
-            let categories = details.categories
-            let duration = details.duration
-            let crewMembers = details.crewMembers
-            let summary = details.summary
-            let imageUrl = details.imageUrl
-            buildViews(rating: rating, name: name, year: year, releaseDate: releaseDate, categories: categories,duration: duration, summary: summary, crewMembers: crewMembers, image: imageUrl)
-        } else {
-            print("There is no movie with this ID.")
-        }
-        
+        setupView()
+        fetchMovieDetails()
     }
     
-    func buildViews(rating: Double, name: String,year: Int, releaseDate: String, categories: [MovieCategoryModel], duration: Int, summary: String, crewMembers: [MovieCrewMemberModel], image: String){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        crewMemberLabels.forEach { $0.alpha = 0 }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        crewMemberLabels.forEach { fadeInView(view: $0, duration: 0.3) }
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .white
+        title = "Movie details"
+    }
+    
+    private func fetchMovieDetails() {
+        guard let details = movieUseCase.getDetails(id: movieID) else {
+            print("There is no movie with this ID.")
+            return
+        }
+        
+        buildViews(rating: details.rating, name: details.name, year: details.year, releaseDate: details.releaseDate, categories: details.categories, duration: details.duration, summary: details.summary, crewMembers: details.crewMembers, image: details.imageUrl)
+    }
+    
+    private func buildViews(rating: Double, name: String, year: Int, releaseDate: String, categories: [MovieCategoryModel], duration: Int, summary: String, crewMembers: [MovieCrewMemberModel], image: String) {
         let imageView = UIImageView()
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: URL(string: image))
@@ -180,21 +185,21 @@ class MovieDetailsViewController: UIViewController {
                    fadeInView(view: label, duration: 0.3)
                }
     }
-    
+
     func animateTextChange(label: UILabel, newText: String) {
         UIView.transition(with: label, duration: 0.2, options: .transitionCrossDissolve, animations: {
             label.text = newText
             label.textAlignment = .left
         }, completion: nil)
     }
-    
+
     func fadeInView(view: UIView, duration: TimeInterval = 0.3) {
         view.alpha = 0
         UIView.animate(withDuration: duration, animations: {
             view.alpha = 1
         })
     }
-    
+
     func formatDateString(from dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -202,7 +207,7 @@ class MovieDetailsViewController: UIViewController {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         return dateFormatter.string(from: date!)
     }
-    
+
     func formatDuration(minutes: Int) -> String {
         let hours = minutes / 60
         let remainingMinutes = minutes % 60
@@ -219,7 +224,7 @@ class MovieDetailsViewController: UIViewController {
         }
         return durationString
     }
-    
+
     func categoryToString(_ category: MovieCategoryModel) -> String {
         switch category {
         case .action: return "Action"
@@ -234,4 +239,5 @@ class MovieDetailsViewController: UIViewController {
         case .western: return "Western"
         }
     }
+
 }

@@ -1,22 +1,17 @@
 import UIKit
 
-class TabBarController : UITabBarController{
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupTabBar()
+class TabBarController: UITabBarController {
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    private func setupTabBar() {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
-        
-        let movieCategoriesListController = MovieCategoriesListViewController(router: Router(navigationController: navigationController!))
-        let movieCategoriesListNavigationController = UINavigationController(rootViewController: movieCategoriesListController)
-        movieCategoriesListNavigationController.tabBarItem = UITabBarItem(title: "Movie List", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
-
-        let favoritesViewController = FavoritesViewController()
-        let favoritesNavigationController = UINavigationController(rootViewController: favoritesViewController)
-        favoritesNavigationController.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
-        
-        viewControllers = [movieCategoriesListNavigationController, favoritesNavigationController]
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
 }

@@ -4,7 +4,6 @@ import PureLayout
 import Kingfisher
 
 class MovieListViewController: UIViewController {
-    let cellIdentifier = "cellId"
     var allMovies: [MovieModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,7 @@ class MovieListViewController: UIViewController {
                 height: view.bounds.height))
         tableView.rowHeight = 150
         view.addSubview(tableView)
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         tableView.dataSource = self
     }
 }
@@ -38,16 +37,17 @@ extension MovieListViewController: UITableViewDataSource,UITableViewDelegate { /
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allMovies.count
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CustomTableViewCell = tableView.dequeueReusableCell(
-            withIdentifier: cellIdentifier,
+            withIdentifier: CustomTableViewCell.identifier,
             for: indexPath) as! CustomTableViewCell// 4.
-        tableView.deselectRow(at: indexPath, animated: true)
         let movie = allMovies[indexPath.row]
-        cell.movie = movie
-        cell.layer.shadowColor = UIColor.gray.cgColor
-        cell.layer.shadowOffset = CGSize(width: 12, height: 12)
-        cell.layer.shadowOpacity = 0.5
+        cell.set(movie: movie)
         return cell
     }
 }

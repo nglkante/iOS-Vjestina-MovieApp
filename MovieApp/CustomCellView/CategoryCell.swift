@@ -5,7 +5,7 @@ import MovieAppData
 
 class CategoryCell: UICollectionViewCell {
     
-    var movie: MovieModel? {
+    var movie: MovieResponse? {
         didSet {
             guard let movie = movie else{return}
             movieImage.kf.indicatorType = .activity
